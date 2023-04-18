@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Box, CameraControls, Environment, GizmoHelper, GizmoViewport, PerspectiveCamera } from '@react-three/drei';
 import './App.css';
+import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
 
 function App() {
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Canvas style={{ height: "100vh" }}>
+        <PerspectiveCamera />
+        <CameraControls />
+        <GizmoHelper>
+          <GizmoViewport />
+        </GizmoHelper>
+        <Environment files="/assets/hdr/4k.hdr" background/>
+        <Box />
+      </Canvas>
+    </Suspense>
   );
 }
 

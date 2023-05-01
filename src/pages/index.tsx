@@ -1,7 +1,7 @@
 import DeckModel from "@/components/DeckModel";
 import TableModel from "@/components/TableModel";
 import { Billboard, Box, Environment, GizmoHelper, GizmoViewport, OrbitControls, PerspectiveCamera, Plane, 
-    TransformControls, Text } from "@react-three/drei";
+    TransformControls, Text, SpotLight } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics, RigidBody } from "@react-three/rapier";
 import { useControls } from "leva";
@@ -16,14 +16,14 @@ export default function Home() {
         cameraPosistion,
         cameraRotation
     } = useControls({
-        cameraControl: false,
+        cameraControl: true,
         cameraPosistion: {
             x: 0,
-            y: 1.79,
+            y: 1.29,
             z: 1.02
         },
         cameraRotation: {
-            x: -0.88,
+            x: -0.45,
             y: 0,
             z: 0
         },
@@ -38,19 +38,18 @@ export default function Home() {
                         makeDefault
                         position={new Vector3(cameraPosistion.x, cameraPosistion.y, cameraPosistion.z)}
                         rotation={new Euler(cameraRotation.x, cameraRotation.y, cameraRotation.z)}/>
-                    {/* <OrbitControls enabled={cameraControl}/> */}
+                    <OrbitControls enabled={cameraControl}/>
                     <GizmoHelper>
                         <GizmoViewport/>
                     </GizmoHelper>
                     <Perf position="bottom-left"/>
-                    <Environment files="/assets/hdr/4k.hdr" background />
+                    <Environment files="/assets/hdr/6k.hdr" background />
                     <TransformControls mode="translate">
                         <Plane args={[10, 10]} rotation={new Euler(Math.PI / 2, 0, 0)}/>
                     </TransformControls>
                     <TableModel />
                     <DeckModel />
                 </Physics>
-                
             </Canvas>
         </Suspense>
     )
